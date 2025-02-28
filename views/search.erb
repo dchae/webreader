@@ -1,0 +1,28 @@
+<h2 class="content-subhead">Search</h2>
+<form action="/search" method="get">
+  <input name="query" value="<%= params[:query] %>">
+  <buttom type="submit">Search</button>
+</form>
+<%if @term%>
+  <%if !@results.empty?%>
+    <h2 class="content-subhead">Results for '<%=@term%>'</h2>
+    <div class="search-result">
+      <ul class="search-result-list">
+        <% @results.each do |chp, par_arr| %>
+          <li class='pure-menu-item'>
+            <a href=/chapters/<%=chp%> class="pure-menu-link"><%=@contents[chp - 1]%></a>
+            <ul class='search-result-items'>
+              <% par_arr.filter { |par_num, par| par_num > 0 }.each do |par_num, par| %>
+                <li class='search-result-item'>
+                  <a href=/chapters/<%=chp%>#paragraph-<%=par_num%> class="search-result-item-link"><%=highlight(@regex_term, par)%></a>
+                </li>
+              <% end%>
+            </ul>
+          </li>
+        <% end %>
+      </ul>
+    </div>
+  <%else%>
+    <p>Sorry, no matches were found.</p>
+  <%end%>
+<%end%>
