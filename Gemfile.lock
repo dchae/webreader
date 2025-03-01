@@ -1,7 +1,11 @@
 GEM
   remote: https://rubygems.org/
   specs:
+    bson (5.0.2)
     erubis (2.7.0)
+    htmlbeautifier (1.4.3)
+    mongo (2.21.0)
+      bson (>= 4.14.1, < 6.0.0)
     multi_json (1.15.0)
     mustermann (3.0.0)
       ruby2_keywords (~> 0.0.1)
@@ -12,6 +16,7 @@ GEM
     rack-protection (3.1.0)
       rack (~> 2.2, >= 2.2.4)
     ruby2_keywords (0.0.5)
+    rubyzip (2.4.1)
     sinatra (3.1.0)
       mustermann (~> 3.0)
       rack (~> 2.2, >= 2.2.4)
@@ -33,7 +38,10 @@ PLATFORMS
 
 DEPENDENCIES
   erubis
+  htmlbeautifier
+  mongo (~> 2)
   puma
+  rubyzip
   sinatra
   sinatra-contrib
   webrick
