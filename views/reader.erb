@@ -1,12 +1,9 @@
 <div id="reader"></div>
 <script>
-  document.addEventListener('DOMContentLoaded', function() {
-    // Use the directory-style URL for epub.js to access the internal structure
-    const url = "http://localhost:9292/library/<%= @file_id %>/";
-    console.log("Loading EPUB from:", url);
+  // Use the directory-style URL for epub.js to access the internal structure
+  const url = "http://localhost:9292/library/<%= @id %>";
 
-    const book = ePub(url);
-    const rendition = book.renderTo('reader', {width: 600, height: 400});
-    const displayed = rendition.display();
-  });
+  const book = ePub(url, { openAs: "epub" });
+  const rendition = book.renderTo('reader', {width: 600, height: 400});
+  const displayed = rendition.display();
 </script>
