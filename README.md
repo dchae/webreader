@@ -24,7 +24,7 @@ Simple browser-based reader application. Server is hosted with Sinatra and Puma.
 - [x] ePubs can be viewed
   - [x] Implement `epub.js` script
   - [ ] Implement ePub reader controls
-- [ ] move `epub.js` script to `./javascripts`
+- [x] move `epub.js` script to `./javascripts`
   - the script currently interpolates a ruby variable, change the reader route to take a query string instead of a path
 - [ ] Upload privileges (only certain users can upload)
 - [ ] Uploads are limited by file size

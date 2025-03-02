@@ -133,8 +133,8 @@ get '/library/:id' do |id|
 end
 
 # Reader routes
-get '/reader/:id' do |id|
-  @id = id
+get '/reader' do
+  @id = params[:id]
   erb :reader
 end
 

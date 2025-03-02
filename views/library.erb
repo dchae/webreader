@@ -2,7 +2,7 @@
 <ul class="books-list">
   <% @files.each do |id, filename| %>
     <li class='book'>
-      <a href="/reader/<%= id %>"><%= filename %></a>
+      <a href="/reader?id=<%= id %>"><%= filename %></a>
     </li>
   <% end %>
 </ul>
