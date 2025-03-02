@@ -1,37 +1,93 @@
 require 'sinatra'
+require 'sinatra/content_for'
 require 'tilt/erubis'
-require 'base64'
 
-require_relative "library"
+require_relative "lib/helpers"
+require_relative "lib/library"
+require_relative "lib/users"
+require_relative "lib/objects"
 
 configure do
-  set :library, Library.new()
+  set :erb, escape_html: true
 end
 
 configure(:development) do
   enable :sessions
   set :session_secret, SecureRandom.hex(32)
   require 'sinatra/reloader'
-  also_reload 'library.rb'
+  also_reload('lib/*.rb')
 end
+
+UNRESTRICTED_PATHS = %w(/ /users/signin /users/signup).freeze
 
 before do
   session[:messages] ||= []
-  @library = settings.library
-  @files = @library.items()
+  @library = Library_DB_Controller.new()
+  @users = Users_DB_Controller.new(logger)
   @page_title = 'webreader'
+
+  redirect_unless_signed_in unless UNRESTRICTED_PATHS.include?(request.fullpath)
 end
 
-helpers do
+after do
+  # Ensure db connection is closed after processing each request
+  @library.close_db
+  @users.close_db
 end
+
+# Landing route
 
 get '/' do
-  erb :home
+  redirect '/library' if signed_in?
+  erb :landing, layout: :layout
 end
 
-get '/reader/:id' do |id|
-  @id = id
-  erb :reader
+# User routes
+## Render Sign Up Page
+get '/users/signup' do
+  redirect_if_signed_in
+  erb :signup
+end
+
+## Sign Up
+post '/users/signup' do
+  username = params[:username].strip
+  password = params[:password]
+
+  reload_on_invalid_signup_params(username, password)
+
+  user_id = @users.add_user_and_return_id(username, password)
+  signin_redirect(username, user_id)
+end
+
+# Render Sign In Page
+get '/users/signin' do
+  redirect_if_signed_in
+  erb :signin
+end
+
+# Signin
+post '/users/signin' do
+  username = params[:username].strip
+  password = params[:password]
+
+  reload_on_error(:signin) do
+    user_id = validate_signin_and_return_id(username, password)
+    signin_redirect(username, user_id)
+  end
+end
+
+## Signout
+post '/users/signout' do
+  signout
+  redirect '/'
+end
+
+# Library routes
+
+get '/library' do
+  @files = @library.items()
+  erb :library
 end
 
 get '/library/new' do
@@ -68,7 +124,7 @@ get '/library/:id' do |id|
   begin
     puts "Serving file: #{id} for reader"
 
-    # content_type 'application/epub+zip'
+    content_type 'application/epub+zip'
     @library.get(id)
   rescue StandardError => e
     puts "Error serving EPUB for reader: #{e.message}"
@@ -76,10 +132,13 @@ get '/library/:id' do |id|
   end
 end
 
-not_found do
-  redirect '/'
+# Reader routes
+get '/reader/:id' do |id|
+  @id = id
+  erb :reader
 end
 
-def valid_filetype(filename)
-  File.extname(filename).downcase == ".epub"
+not_found do
+  # TODO: create 404 page
+  redirect '/'
 end

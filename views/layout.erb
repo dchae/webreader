@@ -15,23 +15,31 @@
       <% end %>
       <% session[:messages].clear %>
     </header>
-    <div id="layout">
-      <nav id="menu">
-        <a href="/">Files</a>
-        <ul class="menu-list">
-          <% @files.each do |id, filename| %>
-            <li class='menu-item'>
-              <a href="/reader/<%= id %>"><%= filename %></a>
+    <main>
+      <nav>
+        <ul>
+          <li>
+            <a href="/library">Library</a>
+          </li>
+          <li>
+            <a href="/library/new">Upload</a>
+          </li>
+          <% if signed_in? %>
+            <li>
+              <form class="user-action" action="/users/signout" method="post">
+                <p class="user-status">
+                  Signed in as
+                  <%= session[:user][:username] %>
+                  <button type="submit">Sign Out</button>
+                </p>
+              </form>
             </li>
           <% end %>
-          <li>
-            <a href="/library/new" class="menu-link">Upload</a>
-          </li>
         </ul>
       </nav>
-      <div id="main">
-        <%= yield %>
+      <div id="content">
+        <%== yield %>
       </div>
-    </div>
+    </main>
   </body>
 </html>

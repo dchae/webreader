@@ -1,6 +1,5 @@
 <div id="reader"></div>
 <script>
-  // Use the directory-style URL for epub.js to access the internal structure
   const url = "http://localhost:9292/library/<%= @id %>";
 
   const book = ePub(url, { openAs: "epub" });
