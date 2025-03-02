@@ -1,5 +1,8 @@
 require 'mongo'
 
+KB = 1024
+MAX_FILESIZE = 5000 * KB
+
 class Library_DB_Controller
   def initialize(dbname: 'library')
     @db = Mongo::Client.new("mongodb://127.0.0.1:27017/#{dbname}")
@@ -21,6 +24,8 @@ class Library_DB_Controller
   end
 
   def add(filename, data)
+    raise InvalidFileSizeError if data.bytesize > MAX_FILESIZE
+
     @fs.upload_from_stream(filename, StringIO.new(data))
   rescue StandardError => e
     puts "MongoDB error: #{e.message}"

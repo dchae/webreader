@@ -85,16 +85,19 @@ end
 
 # Library routes
 
+# Render all books
 get '/library' do
   @files = @library.items()
   erb :library
 end
 
+# Render upload page
 get '/library/new' do
   @page_title = 'Upload'
   erb :upload
 end
 
+# Upload epub file to library database
 post '/library/new' do
   begin
     filename = params[:upload][:filename]
@@ -120,6 +123,7 @@ post '/library/new' do
   end
 end
 
+# Serve epub file
 get '/library/:id' do |id|
   begin
     puts "Serving file: #{id} for reader"

@@ -26,6 +26,12 @@ class ValidationError < StandardError
   attr_reader :status_code
 end
 
+class InvalidFileSizeError < ValidationError
+  def initialize(msg = 'File size must be less than 5MB.')
+    super(msg)
+  end
+end
+
 class InvalidSignupUsernameError < ValidationError
   def initialize(msg = 'Username length must be between 3 and 16 characters.')
     super(msg)
