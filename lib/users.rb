@@ -4,7 +4,7 @@ require 'bcrypt'
 require_relative "helpers"
 
 # Class for querying database via PG gem
-class Users_DB_Controller
+class UsersDBController
   DB_NAME = 'users'
   TEST_DB_NAME = "#{DB_NAME}_test"
 

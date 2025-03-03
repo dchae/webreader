@@ -3,9 +3,10 @@ require 'mongo'
 KB = 1024
 MAX_FILESIZE = 5000 * KB
 
-class Library_DB_Controller
+class LibraryDBController
   def initialize(dbname: 'library')
-    @db = Mongo::Client.new("mongodb://127.0.0.1:27017/#{dbname}")
+    @db = Mongo::Client.new("mongodb://127.0.0.1:27017/#{dbname}",
+                            max_pool_size: 5)
     @fs = Mongo::Grid::FSBucket.new(@db.database)
   end
 

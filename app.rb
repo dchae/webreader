@@ -22,8 +22,8 @@ UNRESTRICTED_PATHS = %w(/ /users/signin /users/signup).freeze
 
 before do
   session[:messages] ||= []
-  @library = Library_DB_Controller.new()
-  @users = Users_DB_Controller.new(logger)
+  @library = LibraryDBController.new()
+  @users = UsersDBController.new(logger)
   @page_title = 'webreader'
 
   redirect_unless_signed_in unless UNRESTRICTED_PATHS.include?(request.fullpath)
@@ -31,8 +31,8 @@ end
 
 after do
   # Ensure db connection is closed after processing each request
-  @library.close_db
-  @users.close_db
+  @library.close_db()
+  @users.close_db()
 end
 
 # Landing route

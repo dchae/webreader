@@ -4,20 +4,22 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title><%= @page_title %></title>
-    <link rel="stylesheet" href="/stylesheets/main.css">
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/jszip/3.1.5/jszip.min.js"></script>
-    <script type="text/javascript" src="/javascripts/epub.min.js"></script>
+    <link rel="stylesheet" href="/styles/whitespace-reset.css" type="text/css">
+    <link rel="stylesheet" href="/styles/main.css" type="text/css">
   </head>
   <body>
     <header>
-      <% session[:messages].each do |message| %>
-        <p class="flash"><%= message %></p>
-      <% end %>
-      <% session[:messages].clear %>
-    </header>
-    <main>
+      <ul class="flash-messages">
+        <% session[:messages].each do |message| %>
+          <li>
+            <p class="flash"><%= message %></p>
+          </li>
+        <% end %>
+        <% session[:messages].clear %>
+      </ul>
+
       <nav>
-        <ul>
+        <menu>
           <li>
             <a href="/library">Library</a>
           </li>
@@ -28,18 +30,18 @@
             <li>
               <form class="user-action" action="/users/signout" method="post">
                 <p class="user-status">
-                  Signed in as
+                  Signed in as:
                   <%= session[:user][:username] %>
                   <button type="submit">Sign Out</button>
                 </p>
               </form>
             </li>
           <% end %>
-        </ul>
+        </menu>
       </nav>
-      <div id="content">
-        <%== yield %>
-      </div>
+    </header>
+    <main id="content">
+      <%== yield %>
     </main>
   </body>
 </html>

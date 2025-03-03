@@ -23,13 +23,15 @@ Simple browser-based reader application. Server is hosted with Sinatra and Puma.
 - [x] ePubs can be uploaded
 - [x] ePubs can be viewed
   - [x] Implement `epub.js` script
-  - [ ] Implement ePub reader controls
+  - [x] Implement ePub reader controls
+  - [x] Implement ePub chapter controls
 - [x] move `epub.js` script to `./javascripts`
   - the script currently interpolates a ruby variable, change the reader route to take a query string instead of a path
+- [ ] Debug "Too many open files" error
+  - possible solution: `book.destroy()`?
 - [ ] Upload privileges (only certain users can upload)
 - [x] Uploads are limited by file size (5MB)
 - [ ] Basic CSS
-- [ ] Refactor front-end to use ajax where possible
 - [ ] create admin panel, where I can:
   - [ ] Reset DBs
   - [ ] Delete books
