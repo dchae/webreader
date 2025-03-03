@@ -9,6 +9,7 @@ require_relative "lib/objects"
 
 configure do
   set :erb, escape_html: true
+  set :library, LibraryDBController.new()
 end
 
 configure(:development) do
@@ -22,7 +23,7 @@ UNRESTRICTED_PATHS = %w(/ /users/signin /users/signup).freeze
 
 before do
   session[:messages] ||= []
-  @library = LibraryDBController.new()
+  @library = settings.library
   @users = UsersDBController.new(logger)
   @page_title = 'webreader'
 
@@ -31,7 +32,6 @@ end
 
 after do
   # Ensure db connection is closed after processing each request
-  @library.close_db()
   @users.close_db()
 end
 
