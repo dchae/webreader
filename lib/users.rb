@@ -1,7 +1,13 @@
 require 'pg'
 require 'bcrypt'
 
-require_relative "helpers"
+# helpers
+def file_path(filename = nil, subfolder = nil)
+  test_dir = 'test/' if ENV['RACK_ENV'] == 'test'
+  filename = File.basename(filename) if filename
+  project_root = File.expand_path('../', __dir__)
+  File.join(*[project_root, test_dir, subfolder, filename].compact)
+end
 
 # Class for querying database via PG gem
 class UsersDBController
@@ -138,20 +144,36 @@ class UsersDBController
 
   ## bookshelf methods
 
-  def add_bookshelf_entry(user_id, book_id)
+  def add_entry_and_return_id(user_id, book_id)
     sql = <<~SQL
       INSERT INTO bookshelf (user_id, book_id)
-      VALUES ($1, $2, $3);
+      VALUES ($1, $2)
+      RETURNING id;
+    SQL
+    result = query(sql, user_id, book_id)
+    result.first['id']
+  end
+
+  def fetch_entry(user_id, book_id)
+    sql = <<~SQL
+      SELECT *
+      FROM bookshelf
+      WHERE user_id = $1
+      AND book_id = $2;
     SQL
     query(sql, user_id, book_id)
   end
 
-  def fetch_bookshelf_entry(entry_id)
+  def entry_exists?(user_id, book_id)
+    !!fetch_entry(user_id, book_id)
+  end
+
+  def fetch_entry_by_id(entry_id)
     sql = <<~SQL
       SELECT bookshelf.*, username
       FROM bookshelf
-      INNER JOIN users ON bookshelf.user_id = users.id
-      WHERE entry.id = $1;
+      INNER JOIN users ON user_id = users.id
+      WHERE bookshelf.id = $1;
     SQL
     query(sql, entry_id)
   end
@@ -186,7 +208,7 @@ class UsersDBController
       UPDATE bookshelf
       SET last_read_page = $1,
           favorite = $2,
-          date_last_updated = NOW()
+          date_last_opened = NOW()
       WHERE id = $3;
     SQL
     query(sql, last_read_page, favorite, entry_id)

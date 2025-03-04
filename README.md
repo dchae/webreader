@@ -29,7 +29,9 @@ Simple browser-based reader application. Server is hosted with Sinatra and Puma.
   - the script currently interpolates a ruby variable, change the reader route to take a query string instead of a path
 - [ ] Debug "Too many open files" error
   - possible solution: `book.destroy()`?
-- [ ] Upload privileges (only certain users can upload)
+- [x] Move helpers to a module
+- [x] Encapsulate main app in a class
+- [ ] Upload privileges (only certain users can upload) ??
 - [x] Uploads are limited by file size (5MB)
 - [ ] Basic CSS
 - [ ] create admin panel, where I can:
@@ -38,9 +40,16 @@ Simple browser-based reader application. Server is hosted with Sinatra and Puma.
   - [ ] Delete users
   - [ ] Manage user privileges
 
+#### Visual
+
+- [ ] Fix: reader is loading taller than expected, causing viewport overflow
+- [ ] add fonts
+- [ ] Grid view library
+
 ### Later
 
 - [ ] User reading progress is saved
 - [ ] Users can favorite books
 - [ ] Implement collection pooling for databases
-- [ ] Automatically delete old books if storage is low
+  - [x] mongoDB
+  - [ ] psql

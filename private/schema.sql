@@ -12,5 +12,5 @@ CREATE TABLE bookshelf (
   book_id text NOT NULL,
   date_last_opened timestamp DEFAULT NOW(),
   last_read_page int NOT NULL DEFAULT 0,
-  favorite boolean NOT NULL DEFAULT true
+  favorite boolean NOT NULL DEFAULT false
 );

@@ -8,6 +8,13 @@
       <option value="2">Chapter 2</option>
     </select>
     <button id="page-right" type="button">&rarr;</button>
+    <button
+      id="toggle-favorite"
+      type="button"
+      href="/users/<%= @username %>/bookshelf/<%= @id %>"
+      data-favorite="<%= @favorite %>"
+    ><%== @favorite ? "&#9829;" : "&#9825;" %></button>
+
   </nav>
 </div>
 

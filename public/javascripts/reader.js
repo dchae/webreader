@@ -1,6 +1,7 @@
 class Reader {
-  constructor(url) {
-    this.book = ePub(url, { openAs: "epub" });
+  constructor(id) {
+    this.id = id;
+    this.book = ePub(`/library/${id}`, { openAs: "epub" });
     this.rendition = this.book.renderTo("reader", {
       width: "100%",
       height: "100%",
@@ -9,6 +10,7 @@ class Reader {
     this.toc = document.getElementById("chapter-select");
     this.leftBtn = document.getElementById("page-left");
     this.rightBtn = document.getElementById("page-right");
+    this.favoriteBtn = document.getElementById("toggle-favorite");
     this.dir = null;
   }
 
@@ -45,6 +47,10 @@ class Reader {
     this.rendition.on("keyup", this.keyHandler.bind(this));
     this.rendition.on("rendered", this.updateCurrentChapterHandler.bind(this));
     this.toc.addEventListener("change", this.chapterSelectHandler.bind(this));
+    this.favoriteBtn.addEventListener(
+      "click",
+      this.toggleFavoriteHandler.bind(this),
+    );
   }
 
   initPageNavButtonHandlers() {
@@ -60,7 +66,6 @@ class Reader {
   }
 
   keyHandler(e) {
-    console.log(e.key);
     if (e.key === "ArrowLeft") this.pageLeft();
     if (e.key === "ArrowRight") this.pageRight();
   }
@@ -94,11 +99,38 @@ class Reader {
     const url = this.toc.options[index].getAttribute("ref");
     this.rendition.display(url);
   }
+
+  async toggleFavoriteHandler(e) {
+    try {
+      e.preventDefault();
+
+      const button = e.target;
+
+      const last_read_page = 0;
+      const favorite = button.dataset.favorite === "true";
+      const path = button.getAttribute("href");
+      const opts = {
+        method: "PUT",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ last_read_page, favorite: !favorite }),
+      };
+
+      const response = await fetch(path, opts);
+      const json = await response.json();
+
+      const state = json.favorite === "t";
+      const whiteHeart = "&#9825;";
+      const blackHeart = "&#9829;";
+      button.dataset.favorite = state;
+      button.innerHTML = state ? blackHeart : whiteHeart;
+    } catch (error) {
+      console.error("Error toggling favorite:", error);
+    }
+  }
 }
 
 const urlParams = new URLSearchParams(window.location.search);
 const id = urlParams.get("id");
-const url = `/library/${id}`;
 
-const reader = new Reader(url);
+const reader = new Reader(id);
 reader.init();
