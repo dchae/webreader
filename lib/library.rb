@@ -33,6 +33,12 @@ class LibraryDBController
     raise e
   end
 
+  def has(id)
+    object_id = BSON::ObjectId.from_string(id)
+    results = @fs.find(_id: object_id)
+    !!results.first
+  end
+
   def get(id)
     stream = StringIO.new
     bson_id = BSON::ObjectId.from_string(id)

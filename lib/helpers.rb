@@ -35,7 +35,7 @@ module ApplicationHelpers
 
   def validate_current_user(username)
     unless signed_in? && session[:user][:username] == username
-      raise Exceptions::UserPermissionsError.new("You don't have permission to modify this user's favorites.")
+      raise Exceptions::UserPermissionsError.new("You don't have permission to modify this user's information.")
     end
     true
   end
@@ -50,8 +50,9 @@ module ApplicationHelpers
   # Render Helpers
   def add_message(content, type = :standard)
     return unless content
-    session[:messages] << UIComponents::FlashMessage.new(content,
-                                                         type)
+    session[:messages] ||= []
+    msg = UIComponents::FlashMessage.new(content, type)
+    session[:messages] << msg
   end
 
   # Redirect helpers
@@ -131,5 +132,12 @@ module ApplicationHelpers
 
     # if user_id == false
     raise Exceptions::InvalidSigninCredentialsError
+  end
+
+  def validate_book_id(id)
+    unless @library.has(id)
+      raise Exceptions::FileNotFoundError.new("Requested file with id: #{id} does not exist.")
+    end
+    true
   end
 end

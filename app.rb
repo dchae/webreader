@@ -28,7 +28,6 @@ class App < Sinatra::Base
   end
 
   before do
-    session[:messages] ||= []
     @library = settings.library
     @users = UsersDBController.new(logger)
     @page_title = 'webreader'
@@ -157,6 +156,7 @@ class App < Sinatra::Base
     begin
       # validate that current user is username
       validate_current_user(username)
+      validate_book_id(book_id)
       user_id = @users.fetch_user_id(username)
 
       # Create a bookshelf entry if one does not yet exist

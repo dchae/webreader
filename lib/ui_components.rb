@@ -5,7 +5,7 @@ module UIComponents
       @type = type
     end
 
-    def html_class
+    def css_class
       @type.to_s
     end
 
@@ -14,5 +14,17 @@ module UIComponents
     end
 
     attr_reader :content, :type
+  end
+
+  class ErrorMessage < FlashMessage
+    def initialize(content)
+      super(content, :error)
+    end
+  end
+
+  class SuccessMessage < FlashMessage
+    def initialize(content)
+      super(content, :success)
+    end
   end
 end

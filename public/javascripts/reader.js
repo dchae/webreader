@@ -101,30 +101,29 @@ class Reader {
   }
 
   async toggleFavoriteHandler(e) {
-    try {
-      e.preventDefault();
+    e.preventDefault();
 
-      const button = e.target;
+    const button = e.target;
 
-      const last_read_page = 0;
-      const favorite = button.dataset.favorite === "true";
-      const path = button.getAttribute("href");
-      const opts = {
-        method: "PUT",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ last_read_page, favorite: !favorite }),
-      };
+    const last_read_page = 0;
+    const favorite = button.dataset.favorite === "true";
+    const path = button.getAttribute("href");
+    const opts = {
+      method: "PUT",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({ last_read_page, favorite: !favorite }),
+    };
 
-      const response = await fetch(path, opts);
-      const json = await response.json();
-
+    const response = await fetch(path, opts);
+    const json = await response.json();
+    if (response.ok) {
       const state = json.favorite === "t";
       const whiteHeart = "&#9825;";
       const blackHeart = "&#9829;";
       button.dataset.favorite = state;
       button.innerHTML = state ? blackHeart : whiteHeart;
-    } catch (error) {
-      console.error("Error toggling favorite:", error);
+    } else {
+      alert(`Error toggling favorite: ${json.error}`);
     }
   }
 }

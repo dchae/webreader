@@ -4,20 +4,17 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title><%= @page_title %></title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+      href="https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100..900;1,100..900&display=swap"
+      rel="stylesheet"
+    >
     <link rel="stylesheet" href="/styles/whitespace-reset.css" type="text/css">
     <link rel="stylesheet" href="/styles/main.css" type="text/css">
   </head>
   <body>
     <header>
-      <ul class="flash-messages">
-        <% session[:messages].each do |message| %>
-          <li>
-            <p class="flash"><%= message %></p>
-          </li>
-        <% end %>
-        <% session[:messages].clear %>
-      </ul>
-
       <nav>
         <menu>
           <li>
@@ -38,6 +35,16 @@
             </li>
           <% end %>
         </menu>
+
+        <ul class="flash-messages">
+          <% session[:messages].each do |message| %>
+            <li>
+              <p class="flash-message <%= message.css_class %>"><%= message %></p>
+            </li>
+          <% end %>
+          <% session[:messages].clear %>
+        </ul>
+
       </nav>
     </header>
     <main id="content">
