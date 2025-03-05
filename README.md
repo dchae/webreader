@@ -32,6 +32,13 @@ A simple browser-based EPUB reader application built with Sinatra.
 
 ## Installation
 
+### Set session secret:
+
+1. Generate secret (`openssl rand -hex 64`).
+2. run `export SESSION_SECRET=generated_secret`
+
+### Install and start:
+
 1. Ensure MongoDB, and PostgreSQL are installed and running
 2. Clone the repository
 3. Run `bundle install` to install Ruby dependencies
