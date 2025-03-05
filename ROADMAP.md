@@ -1,47 +1,60 @@
 # Roadmap
 
-## Current
+## Current Focus
 
-### Visual
+### Visual Improvements
 
-- [ ] Grid view library
+- [ ] Grid view for library display
 
-## Later
+## Planned Features
 
-- [ ] write unit tests
-- [ ] create admin panel, where I can:
-  - [ ] Reset DBs
+### User Experience
+
+- [ ] User reading progress persistence
+- [ ] Customizable reader font size
+- [ ] Customizable font family selection
+- [ ] Dark mode support
+
+### Administration
+
+- [ ] Admin panel with capabilities to:
+  - [ ] Reset databases
   - [ ] Delete books
   - [ ] Delete users
   - [ ] Manage user privileges
-- [ ] User reading progress is saved
-- [ ] reader font size can be changed
-- [ ] reader font family can be changed
-- [ ] Dark mode
-- [ ] Implement collection pooling for databases
-  - [x] mongoDB
-  - [ ] psql
 
-## Completed
+### Development
 
-- [x] Debug "Too many open files" error
-  - solution was persistent mongoDB connection
-- [x] Basic CSS
-- [x] Fix: reader is loading taller/wider than expected, causing viewport overflow
-- [x] add a font
-- [x] Flash messages rework
-  - [x] fixed position
-  - [x] auto-dismiss
-  - [x] dismiss on click
+- [ ] Write unit tests
+- [ ] Implement collection pooling for PostgreSQL database
+- [ ] Optimize performance for large libraries
+
+## Completed ✓
+
+### Core Functionality
+
 - [x] Users can sign-up and sign-in
-- [x] ePubs can be uploaded
-- [x] ePubs can be viewed
-  - [x] Implement `epub.js` script
-  - [x] Implement ePub reader controls
-  - [x] Implement ePub chapter controls
-- [x] move `epub.js` script to `./javascripts`
-  - the script currently interpolates a ruby variable, change the reader route to take a query string instead of a path
+- [x] EPUBs can be uploaded and stored
+- [x] EPUBs can be viewed with full reader controls
+- [x] Users can favorite books
+
+### Architecture
+
 - [x] Move helpers to a module
 - [x] Encapsulate main app in a class
-- [x] Uploads are limited by file size (5MB)
-- [x] Users can favorite books
+- [x] Move `epub.js` script to its own module in `./javascripts`
+
+### UI Improvements
+
+- [x] Basic CSS styling
+- [x] Custom font integration
+- [x] Flash messages improvements:
+  - [x] Fixed position notifications
+  - [x] Auto-dismiss functionality
+  - [x] Click-to-dismiss option
+
+### Bug Fixes
+
+- [x] Fixed "Too many open files" error with persistent MongoDB connection
+- [x] Fixed reader viewport overflow issue
+- [x] Implemented file size limits for uploads (5MB)

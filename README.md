@@ -1,16 +1,49 @@
 # Book Viewer
 
-Simple browser-based reader application. Server is hosted with Sinatra and Puma. Books are stored in a MongoDB database. Users are stored in a PostgreSQL database.
+A simple browser-based EPUB reader application built with Sinatra.
+
+## Stack
+
+- **Backend**: Ruby with Sinatra for routing and server-side logic
+- **Storage**:
+  - MongoDB for storing EPUB files
+  - PostgreSQL for user accounts and reading preferences
+- **Frontend**:
+  - Vanilla JavaScript (no framework)
+  - EPUB.js for rendering the EPUB content
+  - Basic CSS for styling
+
+## Features
+
+- User authentication (signup/signin)
+- EPUB file upload and storage
+- Chapter navigation
+- Favorite books management
+- Responsive EPUB viewer
 
 ## Dependencies
 
-- `mongodb` (tested on v8.0.4)
-- `postgreSQL` (tested on v14.17)
-- `ruby` (tested on v3.2.2)
+- Ruby 3.3.4
+- MongoDB 8.0.4+
+- PostgreSQL 14.17+
+- JavaScript libraries:
+  - [epub.js](https://github.com/futurepress/epub.js)
+  - [JSZip](https://stuk.github.io/jszip/)
 
 ## Installation
 
-- ensure you have dependencies installed
-- clone the repo and enter the project directory
-- run `bundle install`
-- start server with `bundle exec puma`
+1. Ensure MongoDB, and PostgreSQL are installed and running
+2. Clone the repository
+3. Run `bundle install` to install Ruby dependencies
+4. Start the server with `bundle exec puma`
+
+## Project Structure
+
+- `app.rb`: Main application file with routes and configuration
+- `lib/`: Helper modules and database controllers
+- `views/`: ERB templates for the UI
+- `public/`: Static assets (JavaScript, CSS)
+
+## Roadmap
+
+See [ROADMAP.md](ROADMAP.md)
