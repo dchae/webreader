@@ -2,22 +2,18 @@
 
 ## Current
 
-- [ ] Debug "Too many open files" error
-  - possible solution: `book.destroy()`?
-- [ ] Basic CSS
+### Visual
+
+- [ ] Grid view library
+
+## Later
+
+- [ ] write unit tests
 - [ ] create admin panel, where I can:
   - [ ] Reset DBs
   - [ ] Delete books
   - [ ] Delete users
   - [ ] Manage user privileges
-
-### Visual
-
-- [ ] Fix: reader is loading taller than expected, causing viewport overflow
-- [ ] Grid view library
-
-## Later
-
 - [ ] User reading progress is saved
 - [ ] reader font size can be changed
 - [ ] reader font family can be changed
@@ -28,6 +24,10 @@
 
 ## Completed
 
+- [x] Debug "Too many open files" error
+  - solution was persistent mongoDB connection
+- [x] Basic CSS
+- [x] Fix: reader is loading taller/wider than expected, causing viewport overflow
 - [x] add a font
 - [x] Flash messages rework
   - [x] fixed position

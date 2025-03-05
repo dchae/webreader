@@ -183,7 +183,7 @@ class UsersDBController
       SELECT bookshelf.*, username
       FROM bookshelf
       INNER JOIN users ON bookshelf.user_id = users.id
-      ORDER BY date_created DESC
+      ORDER BY date_last_opened DESC
       LIMIT $1 OFFSET $2;
     SQL
     offset = page.to_i * lim.to_i
@@ -196,11 +196,21 @@ class UsersDBController
       FROM bookshelf
       INNER JOIN users ON bookshelf.user_id = users.id
       WHERE user_id = $3
-      ORDER BY date_created DESC
+      ORDER BY date_last_opened DESC
       LIMIT $1 OFFSET $2;
     SQL
     offset = page.to_i * lim.to_i
     query(sql, lim.to_i + 1, offset, user_id)
+  end
+
+  def fetch_favorites_by_user(user_id)
+    sql = <<~SQL
+      SELECT book_id
+      FROM bookshelf
+      WHERE user_id = $1 AND favorite = true
+      ORDER BY date_last_opened DESC;
+    SQL
+    query(sql, user_id)
   end
 
   def update_entry(entry_id, last_read_page, favorite)

@@ -16,6 +16,14 @@ module ApplicationHelpers
     add_message("Welcome #{username}!", :success)
   end
 
+  def cur_username
+    session[:user][:username]
+  end
+
+  def cur_user_id
+    session[:user][:id]
+  end
+
   def signin_redirect(username, user_id)
     setup_user_session(username, user_id)
 
@@ -34,7 +42,7 @@ module ApplicationHelpers
   end
 
   def validate_current_user(username)
-    unless signed_in? && session[:user][:username] == username
+    unless signed_in? && cur_username == username
       raise Exceptions::UserPermissionsError.new("You don't have permission to modify this user's information.")
     end
     true
@@ -140,5 +148,14 @@ module ApplicationHelpers
       raise Exceptions::FileNotFoundError.new("Requested file with id: #{id} does not exist.")
     end
     true
+  end
+
+  def get_favorites(user_id)
+    book_ids = @users.fetch_favorites_by_user(user_id)
+    items = @library.items
+    favorites = book_ids.map do |row|
+      book_id = row['book_id']
+      [book_id, items[book_id]]
+    end
   end
 end

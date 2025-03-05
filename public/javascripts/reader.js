@@ -4,7 +4,8 @@ class Reader {
     this.book = ePub(`/library/${id}`, { openAs: "epub" });
     this.rendition = this.book.renderTo("reader", {
       width: "100%",
-      height: "100%",
+      height: 600,
+      spread: "always",
     });
 
     this.toc = document.getElementById("chapter-select");

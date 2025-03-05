@@ -1,8 +1,26 @@
-<h2>Library</h2>
-<ul class="books-list">
-  <% @files.each do |id, filename| %>
-    <li class='book'>
-      <a href="/reader?id=<%= id %>"><%= filename %></a>
-    </li>
-  <% end %>
-</ul>
+<section>
+  <h2>Library</h2>
+  <div id="library">
+
+    <h3>Favorites</h3>
+    <ul class="favorites-list">
+      <% @favorites.each do |id, filename| %>
+        <li class='book'>
+          <a href="/reader?id=<%= id %>"><%= filename %></a>
+        </li>
+      <% end %>
+      <% if @favorites.empty? %>
+        <p>No favorites yet...</p>
+      <% end %>
+    </ul>
+
+    <h3>All</h3>
+    <ul class="books-list">
+      <% @files.each do |id, filename| %>
+        <li class='book'>
+          <a href="/reader?id=<%= id %>"><%= filename %></a>
+        </li>
+      <% end %>
+    </ul>
+  </div>
+</section>

@@ -29,7 +29,7 @@
               <form class="user-action" action="/users/signout" method="post">
                 <p class="user-status">
                   Signed in as:
-                  <%= session[:user][:username] %>
+                  <%= cur_username %>
                   <button type="submit">Sign Out</button>
                 </p>
               </form>

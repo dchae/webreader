@@ -17,7 +17,7 @@ h2 {
 body {
   width: 100vw;
   height: 100vh;
-  /*overflow: hidden;*/
+  overflow: hidden;
   display: grid;
   grid-template-columns: 100%;
   grid-template-rows: 50px 1fr;
@@ -33,6 +33,7 @@ header {
 header menu {
   display: flex;
   justify-content: center;
+  align-items: center;
   gap: 20px;
   list-style: none;
 }
@@ -44,13 +45,15 @@ header menu a {
 
 main {
   height: 100%;
-  margin: 20px;
-  margin: 0 auto;
+  margin: 20px 0;
 }
 
 main section {
+  margin: 0 auto;
+  width: 600px;
   display: flex;
   flex-direction: column;
+  align-items: center;
   gap: 7px;
 }
 
@@ -63,6 +66,12 @@ button,
   border-radius: 5px;
   text-decoration: none;
   font-size: 1em;
+  text-align: center;
+}
+
+button:hover,
+.button:hover {
+  background-color: rgb(90 90 90);
 }
 
 /* flash message notifications */
@@ -97,11 +106,42 @@ button,
   min-width: 200px;
 }
 
+.user-form span {
+  display: flex;
+  justify-content: space-between;
+  gap: 5px;
+}
+
+.user-form span * {
+  flex: 1;
+}
+
+/* library */
+#library {
+  margin: 10px;
+}
+
+#library h3 {
+  margin: 5px 0 0 0;
+}
+
+#library ul {
+  margin: 5px 0 10px 0;
+}
+
+.book {
+  margin: 0 0 5px 5px;
+}
+
+.book a {
+  text-decoration: none;
+}
+
 /* reader */
 #reader {
-  max-width: 100%;
   width: 100%;
   height: 100%;
+  overflow: hidden;
 }
 
 #reader nav {
@@ -122,4 +162,6 @@ button,
 
 #reader .epub-container {
   /* epub.js container */
+  /*max-width: 100%;*/
+  /*overflow: hidden;*/
 }

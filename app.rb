@@ -93,6 +93,9 @@ class App < Sinatra::Base
   # Render all books
   get '/library' do
     @files = @library.items()
+    user_id = cur_user_id()
+    @favorites = get_favorites(user_id)
+
     erb :library
   end
 
@@ -144,7 +147,7 @@ class App < Sinatra::Base
   # Reader routes
   get '/reader' do
     @id = params[:id]
-    @username = session[:user][:username]
+    @username = cur_username()
     user_id = @users.fetch_user_id(@username)
 
     entry = @users.fetch_entry(user_id, @id).first

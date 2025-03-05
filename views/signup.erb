@@ -1,17 +1,19 @@
-<h2>Sign Up</h2>
-<form class="user-form" action="/users/signup" method="post">
-  <label for="username">Username:</label>
-  <input
-    type="text"
-    id="username"
-    name="username"
-    value="<%=params[:username] || ""%>"
-  >
-  <label for="password">Password:</label>
-  <input type="password" id="password" name="password">
+<section>
+  <h2>Sign Up</h2>
+  <form class="user-form" action="/users/signup" method="post">
+    <label for="username">Username:</label>
+    <input
+      type="text"
+      id="username"
+      name="username"
+      value="<%=params[:username] || ""%>"
+    >
+    <label for="password">Password:</label>
+    <input type="password" id="password" name="password">
 
-  <span class="actions">
-    <button type="submit">Sign Up</button>
-    <a class="button" href="/users/signin">Sign In</a>
-  </span>
-</form>
+    <span class="actions">
+      <button type="submit">Sign Up</button>
+      <a class="button" href="/users/signin">Sign In</a>
+    </span>
+  </form>
+</section>
