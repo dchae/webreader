@@ -51,7 +51,8 @@ module ApplicationHelpers
   def add_message(content, type = :standard)
     return unless content
     session[:messages] ||= []
-    msg = UIComponents::FlashMessage.new(content, type)
+    options = { type: type }
+    msg = UIComponents::FlashMessage.new(content, options)
     session[:messages] << msg
   end
 

@@ -1,8 +1,10 @@
 module UIComponents
   class FlashMessage
-    def initialize(content, type = :standard)
+    def initialize(content, options = {})
       @content = content
-      @type = type
+      @type = options.fetch(:type, :standard)
+      @dismissable = options.fetch(:dismissable, true)
+      @timeout = options.fetch(:timeout, 3000)
     end
 
     def css_class
@@ -13,18 +15,18 @@ module UIComponents
       @content
     end
 
-    attr_reader :content, :type
+    attr_reader :content, :dismissable, :timeout
   end
 
   class ErrorMessage < FlashMessage
     def initialize(content)
-      super(content, :error)
+      super(content, { type: :error })
     end
   end
 
   class SuccessMessage < FlashMessage
     def initialize(content)
-      super(content, :success)
+      super(content, { type: :success })
     end
   end
 end

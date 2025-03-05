@@ -12,6 +12,7 @@
     >
     <link rel="stylesheet" href="/styles/whitespace-reset.css" type="text/css">
     <link rel="stylesheet" href="/styles/main.css" type="text/css">
+    <script type="text/javascript" src="/javascripts/flash-messages.js"></script>
   </head>
   <body>
     <header>
@@ -37,9 +38,12 @@
         </menu>
 
         <ul class="flash-messages">
-          <% session[:messages].each do |message| %>
-            <li>
-              <p class="flash-message <%= message.css_class %>"><%= message %></p>
+          <% session[:messages].each do |msg| %>
+            <li
+              class="flash-message <%= msg.css_class %>"
+              data-dismissable="<%= msg.dismissable %>"
+              data-timeout="<%= msg.timeout %>"
+            ><%= msg %>
             </li>
           <% end %>
           <% session[:messages].clear %>

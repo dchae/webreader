@@ -14,12 +14,7 @@
 ### Visual
 
 - [ ] Fix: reader is loading taller than expected, causing viewport overflow
-- [ ] add fonts
 - [ ] Grid view library
-- [ ] Flash messages rework
-  - [ ] fixed position
-  - [ ] auto-dismiss
-  - [ ] dismiss on click
 
 ## Later
 
@@ -33,6 +28,11 @@
 
 ## Completed
 
+- [x] add a font
+- [x] Flash messages rework
+  - [x] fixed position
+  - [x] auto-dismiss
+  - [x] dismiss on click
 - [x] Users can sign-up and sign-in
 - [x] ePubs can be uploaded
 - [x] ePubs can be viewed
