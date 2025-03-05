@@ -2,6 +2,8 @@
 
 A simple browser-based EPUB reader application built with Sinatra.
 
+[Demo Link](https://webreader.dchae.com)
+
 ## Stack
 
 - **Backend**: Ruby with Sinatra for routing and server-side logic
@@ -32,12 +34,12 @@ A simple browser-based EPUB reader application built with Sinatra.
 
 ## Installation
 
-### Set session secret:
+### Set session secret
 
 1. Generate secret (`openssl rand -hex 64`).
 2. run `export SESSION_SECRET=generated_secret`
 
-### Install and start:
+### Install and start
 
 1. Ensure MongoDB, and PostgreSQL are installed and running
 2. Clone the repository
