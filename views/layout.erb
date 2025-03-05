@@ -38,15 +38,17 @@
         </menu>
 
         <ul class="flash-messages">
-          <% session[:messages].each do |msg| %>
-            <li
-              class="flash-message <%= msg.css_class %>"
-              data-dismissable="<%= msg.dismissable %>"
-              data-timeout="<%= msg.timeout %>"
-            ><%= msg %>
-            </li>
+          <% if session[:messages] %>
+            <% session[:messages].each do |msg| %>
+              <li
+                class="flash-message <%= msg.css_class %>"
+                data-dismissable="<%= msg.dismissable %>"
+                data-timeout="<%= msg.timeout %>"
+              ><%= msg %>
+              </li>
+            <% end %>
+            <% session[:messages].clear %>
           <% end %>
-          <% session[:messages].clear %>
         </ul>
 
       </nav>
