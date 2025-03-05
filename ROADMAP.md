@@ -4,6 +4,9 @@
 
 ### Visual Improvements
 
+- [ ] Fix scaling on mobile
+- [ ] Fix reader overflow on mobile
+- [ ] TOC menu should auto-scale to width and overflow
 - [ ] Grid view for library display
 
 ## Planned Features
