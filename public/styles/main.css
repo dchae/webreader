@@ -16,6 +16,7 @@ h2 {
 
 body {
   width: 100vw;
+  min-width: 250px;
   height: 100vh;
   overflow: hidden;
   display: grid;
@@ -25,7 +26,7 @@ body {
 
 header {
   padding: 10px 0;
-  height: 40px;
+  height: fit-content;
   color: white;
   background-color: rgb(70 70 70);
 }
@@ -50,9 +51,10 @@ main {
 
 main section {
   margin: 0 auto;
-  width: 600px;
+  max-width: 600px;
   display: flex;
   flex-direction: column;
+  flex-wrap: wrap;
   align-items: center;
   gap: 7px;
 }
@@ -118,7 +120,9 @@ button:hover,
 
 /* library */
 #library {
-  margin: 10px;
+  width: 100%;
+  padding: 10px;
+  text-wrap: balance;
 }
 
 #library h3 {
@@ -145,8 +149,9 @@ button:hover,
 }
 
 #reader nav {
-  margin-top: 10px;
+  margin: 10px 10px 0 10px;
   display: flex;
+  flex-wrap: nowrap;
   justify-content: center;
   align-items: baseline;
   gap: 5px;
@@ -157,7 +162,10 @@ button:hover,
 }
 
 #reader nav select {
+  flex: 1 1 30px;
+  width: 150px;
   padding: 3px 5px;
+  overflow: hidden;
 }
 
 #reader .epub-container {
