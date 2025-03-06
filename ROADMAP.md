@@ -11,8 +11,7 @@
 
 ### User Experience
 
-- [ ] Adding to favorites should show a flash message
-- [ ] Favorite button should update immediately then revert with message if Ajax request fails
+- [ ] User reading progress display
 - [ ] User reading progress persistence
 - [ ] Customizable reader font size
 - [ ] Customizable font family selection
@@ -36,6 +35,8 @@
 
 ### Core Functionality
 
+- [x] Adding to favorites should show a flash message
+- [x] Favorite button should update immediately then revert with message if Ajax request fails
 - [x] Users can sign-up and sign-in
 - [x] EPUBs can be uploaded and stored
 - [x] EPUBs can be viewed with full reader controls
