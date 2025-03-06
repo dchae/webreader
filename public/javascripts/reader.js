@@ -103,11 +103,14 @@ class Reader {
 
   async toggleFavoriteHandler(e) {
     e.preventDefault();
+    const whiteHeart = "&#9825;";
+    const blackHeart = "&#9829;";
 
     const button = e.target;
 
     const last_read_page = 0;
     const favorite = button.dataset.favorite === "true";
+    button.innerHTML = !favorite ? blackHeart : whiteHeart;
     const path = button.getAttribute("href");
     const opts = {
       method: "PUT",
@@ -119,13 +122,24 @@ class Reader {
     const json = await response.json();
     if (response.ok) {
       const state = json.favorite === "t";
-      const whiteHeart = "&#9825;";
-      const blackHeart = "&#9829;";
       button.dataset.favorite = state;
       button.innerHTML = state ? blackHeart : whiteHeart;
+      const msg = state ? "Added to favorites" : "Removed from favorites";
+      this.addMessage(msg);
     } else {
-      alert(`Error toggling favorite: ${json.error}`);
+      button.innerHTML = favorite ? blackHeart : whiteHeart;
+      this.addMessage(`Error toggling favorite: ${json.error}`);
     }
+  }
+
+  addMessage(msg) {
+    const list = document.querySelector(".flash-messages");
+    const li = document.createElement("li");
+    li.className = "flash-message standard";
+    li.dataset["dismissable"] = true;
+    li.dataset["timeout"] = 3000;
+    li.textContent = msg;
+    list.appendChild(li);
   }
 }
 

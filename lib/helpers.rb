@@ -77,7 +77,7 @@ module ApplicationHelpers
 
     add_message(Exceptions::NotSignedInError.new.message, :error)
     add_next_location(request.fullpath)
-    redirect '/users/signin'
+    redirect '/'
   end
 
   # Validation helpers

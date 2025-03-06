@@ -175,11 +175,9 @@ class App < Sinatra::Base
       last_read_page = request_payload['last_read_page']
       favorite = request_payload['favorite']
 
-      # Update the entry with the new values
       @users.update_entry(id, last_read_page, favorite)
       updated_entry = @users.fetch_entry_by_id(id).first
 
-      # Return a JSON response
       content_type :json
       updated_entry.to_json
     rescue StandardError => e

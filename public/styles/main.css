@@ -98,11 +98,13 @@ button:active,
 /* flash message notifications */
 .flash-messages {
   position: fixed;
+  z-index: 10;
   top: 30px;
   right: 20px;
 }
 
 .flash-message {
+  cursor: default;
   margin: 5px 0;
   padding: 10px;
   border-radius: 5px;
