@@ -4,7 +4,6 @@
 
 ### Visual Improvements
 
-- [ ] Adding to favorites should show a flash message
 - [ ] Fix reader overflow on mobile
 - [ ] Grid view for library display
 
@@ -12,6 +11,8 @@
 
 ### User Experience
 
+- [ ] Adding to favorites should show a flash message
+- [ ] Favorite button should update immediately then revert with message if Ajax request fails
 - [ ] User reading progress persistence
 - [ ] Customizable reader font size
 - [ ] Customizable font family selection
