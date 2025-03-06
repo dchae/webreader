@@ -6,7 +6,7 @@
 
 html {
   font-family: "EB Garamond", Garamond, Georgia, serif;
-  font-size: 14px;
+  font-size: 16px;
 }
 
 h1,
@@ -31,7 +31,7 @@ header {
   background-color: rgb(70 70 70);
 }
 
-header menu {
+nav menu {
   display: flex;
   justify-content: center;
   align-items: center;
@@ -39,9 +39,20 @@ header menu {
   list-style: none;
 }
 
-header menu a {
+nav menu a {
   color: white;
   text-decoration: none;
+}
+
+nav menu a:hover {
+  opacity: 0.7;
+}
+
+nav .user-action {
+  display: flex;
+  gap: 10px;
+  justify-content: center;
+  align-items: center;
 }
 
 main {
@@ -63,18 +74,25 @@ main section {
 button,
 .button {
   border: none;
-  color: white;
-  background-color: gray;
+  color: black;
+  background-color: rgb(220 220 220);
   padding: 3px 7px;
   border-radius: 5px;
   text-decoration: none;
+  font-family: inherit;
   font-size: 1em;
   text-align: center;
 }
 
 button:hover,
 .button:hover {
-  background-color: rgb(90 90 90);
+  background-color: rgb(200 200 200);
+}
+
+button:active,
+.button:active {
+  color: white;
+  background-color: rgb(70 70 70);
 }
 
 /* flash message notifications */
@@ -103,16 +121,17 @@ button:hover,
 }
 
 .user-form input {
-  padding: 3px 8px;
-  border: 1px solid gray;
-  border-radius: 5px;
+  padding: 5px 8px;
+  border: 1px solid rgba(0, 0, 0, 0.3);
+  border-radius: 2px;
   min-width: 200px;
 }
 
 .user-form span {
+  margin-top: 5px;
   display: flex;
   justify-content: space-between;
-  gap: 5px;
+  gap: 7px;
 }
 
 .user-form span * {
