@@ -4,9 +4,8 @@
 
 ### Visual Improvements
 
-- [ ] Fix scaling on mobile
+- [ ] Adding to favorites should show a flash message
 - [ ] Fix reader overflow on mobile
-- [ ] TOC menu should auto-scale to width and overflow
 - [ ] Grid view for library display
 
 ## Planned Features
@@ -58,6 +57,8 @@
 
 ### Bug Fixes
 
+- [x] Fix scaling on mobile
+- [x] TOC menu should auto-scale to width and overflow
 - [x] Fixed "Too many open files" error with persistent MongoDB connection
 - [x] Fixed reader viewport overflow issue
 - [x] Implemented file size limits for uploads (5MB)
