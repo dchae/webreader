@@ -45,7 +45,9 @@ header menu a {
 }
 
 main {
+  box-sizing: border-box;
   height: 100%;
+  padding-bottom: 25px;
 }
 
 main section {
